@@ -81,9 +81,9 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   name: 'Bhutanese Musical Group of Rochester',
   shortName: 'BMGR',
-  tagline: 'Preserving and promoting Nepali music, arts, and culture',
+  tagline: 'Preserving and promoting Bhutanese Nepali music, arts, and culture',
   description:
-    'The Bhutanese Musical Group of Rochester preserves and promotes Nepali music, arts, and culture by uniting our community through performance, education, and cultural celebration.',
+    'The Bhutanese Musical Group of Rochester preserves and promotes Bhutanese Nepali music, arts, and culture by uniting our community through performance, education, and cultural celebration.',
   domain: 'https://bmgr.pages.dev',
   locale: 'en_US',
   founded: 2019,
@@ -91,7 +91,7 @@ export const siteConfig: SiteConfig = {
   seo: {
     title: 'BMGR — Bhutanese Musical Group of Rochester',
     description:
-      'The Bhutanese Musical Group of Rochester preserves and promotes Nepali music, arts, and culture through performance, education, and community events in Rochester, NY.',
+      'The Bhutanese Musical Group of Rochester preserves and promotes Bhutanese Nepali music, arts, and culture through performance, education, and community events in Rochester, NY.',
     keywords: [
       'BMGR',
       'Bhutanese music',
@@ -125,9 +125,9 @@ export const siteConfig: SiteConfig = {
     fontBody: 'Work Sans Variable',
   },
   mission:
-    'The Bhutanese Musical Group of Rochester preserves and promotes Nepali music, arts, and culture by uniting our community through performance, education, and cultural celebration. We aim to pass our rich cultural legacy to future generations while fostering cultural understanding in our new home.',
+    'The Bhutanese Musical Group of Rochester preserves and promotes Bhutanese Nepali music, arts, and culture by uniting our community through performance, education, and cultural celebration. We aim to pass our rich cultural legacy to future generations while fostering cultural understanding in our new home.',
   vision:
-    'Our vision is to build a vibrant community where Bhutanese Nepali music, arts, and culture thrive, connecting generations and sharing our heritage with the wider community.',
+    'Our vision is to build a vibrant community where Bhutanese Nepali music, arts, and cultural identity thrive — connecting generations and sharing our unique heritage with the wider community.',
   about:
     'Founded in 2019, the Bhutanese Musical Group of Rochester (BMGR) brings together passionate musicians, singers, and cultural enthusiasts from the Bhutanese Nepali community in Rochester, New York. Our roots trace back to the Flamingo Band, co-founded in 1993 in Timai, Jhapa, Nepal. Today, BMGR organizes musical events, conducts harmonium classes, performs at community celebrations, and works to preserve and share our rich musical heritage with future generations.',
   nav: [
@@ -135,6 +135,8 @@ export const siteConfig: SiteConfig = {
     { label: 'About', href: '/about/' },
     { label: 'Members', href: '/members/' },
     { label: 'Events', href: '/events/' },
+    { label: 'Gallery', href: '/gallery/' },
+    { label: 'Blog', href: '/blog/' },
     { label: 'Contact', href: '/contact/' },
   ],
   members: [
@@ -188,7 +190,7 @@ export const siteConfig: SiteConfig = {
       name: 'Kiran Pele',
       role: 'Arts & Drama Director',
       bio: 'Kiran Pele has a prolific career in theatre and film, having performed in over 100 stage dramas across Nepal and India. His film credits include notable Nepali movies such as Jhupadi Ko Jindagi, Tukriyeko Mutu, and Mission Nepal. He received acting training from legendary filmmaker Upendra Subba and journalism training from respected journalists. Honored with more than 25 letters of appreciation, Kiran has served as President of multiple community organizations and remains a committed BMGR contributor.',
-      photo: null,
+      photo: '/images/KiranPeleGurung.jpg',
       instruments: ['Acting', 'Drama Direction'],
       variant: 2,
     },
@@ -215,6 +217,30 @@ export const siteConfig: SiteConfig = {
       photo: null,
       instruments: ['Vocals', 'Composition', 'Songwriting'],
       variant: 5,
+    },
+    {
+      name: 'Yogesh Adhikari',
+      role: 'Operations & Technology',
+      bio: 'Handles technology, digital design, and operational support for BMGR. Responsible for the group\'s web presence, meeting documentation, and digital communications.',
+      photo: null,
+      instruments: [],
+      variant: 1,
+    },
+    {
+      name: 'Tek Acharya',
+      role: 'Vocalist & Secretary',
+      bio: 'Serves as Treasurer and Secretary for BMGR, managing finances, inventory, and supplies. Also contributes to marketing efforts and performs as a vocalist at group events.',
+      photo: '/images/members/TekAcharya.jpg',
+      instruments: ['Vocals'],
+      variant: 2,
+    },
+    {
+      name: 'Kumar Mishra',
+      role: 'Lyricist & Member',
+      bio: 'A dedicated member of BMGR who contributes original lyrics and songwriting to the group\'s growing musical repertoire.',
+      photo: null,
+      instruments: ['Lyrics', 'Songwriting'],
+      variant: 3,
     },
   ],
   programs: [
@@ -264,7 +290,7 @@ export const siteConfig: SiteConfig = {
       status: 'planned',
     },
     {
-      title: 'Dashain/Tihar BCGR Nite',
+      title: 'Dashain/Tihar BMGR Nite',
       date: 'Fall 2026',
       description:
         'Annual celebration featuring musical performances by BMGR members and community artists during the festive season.',

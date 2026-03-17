@@ -1,0 +1,62 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import CulturalDivider from '@/components/ui/CulturalDivider.astro';
+
+const posts = [
+  { slug: 'welcome-to-bmgr', title: 'Welcome to Our New Home on the Web', date: '2026-03-15', excerpt: 'After months of planning, the official BMGR website is finally here. A look at why we built it, what you\'ll find, and what it means for our community.', author: 'Yogesh Adhikari' },
+  { slug: 'narayan-gopal-smriti-saanjh', title: 'Remembering Narayan Gopal: A Night of Music and Memory', date: '2026-03-12', excerpt: 'In December 2023, BMGR organized the Narayan Gopal Smriti Saanjh — an evening dedicated to the legendary voice of Nepal. Here\'s what that night meant to us.', author: 'Yogesh Adhikari' },
+  { slug: 'summer-concert-2026', title: 'The Grand Summer Concert Is Coming', date: '2026-03-10', excerpt: 'BMGR is planning its biggest event yet for June 2026. Nepali folk songs, cultural dances, drama, and community — here\'s what we\'re working on.', author: 'Yogesh Adhikari' },
+  { slug: 'deusi-bhailo-2024', title: 'Deusi-Bhailo 2024: Going Door to Door with Music', date: '2026-02-25', excerpt: 'During Tihar 2024, BMGR members visited nine homes across Rochester carrying the tradition of Deusi-Bhailo. We raised funds, but more importantly, we brought our community closer.', author: 'Yogesh Adhikari' },
+  { slug: 'harmonium-classes', title: 'Why We Teach Harmonium Every Week', date: '2026-02-20', excerpt: 'The harmonium is the heartbeat of Bhutanese Nepali music. Our weekly classes are about more than learning notes — they\'re about keeping a tradition alive.', author: 'Yogesh Adhikari' },
+];
+
+function formatDate(d: string) {
+  return new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+---
+
+<PageLayout title="News & Stories" subtitle="Updates from our community, event recaps, and stories behind the music" description="Blog posts from the Bhutanese Musical Group of Rochester.">
+  <!-- Newsletter -->
+  <section class="py-10 bg-earth-bg">
+    <div class="max-w-2xl mx-auto px-6 reveal">
+      <div class="bg-earth-surface border border-earth-faint/10 rounded-xl p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div class="flex-1">
+          <h3 class="font-display text-base font-semibold mb-1">Stay Updated</h3>
+          <p class="text-xs text-earth-muted">Get event reminders and BMGR news delivered to your inbox.</p>
+        </div>
+        <form id="newsletter-form" class="flex gap-2 w-full sm:w-auto">
+          <input type="email" required placeholder="your@email.com" class="flex-1 sm:w-48 px-3 py-2 bg-earth-bg border border-earth-faint/20 rounded-lg text-sm text-earth-warm placeholder:text-earth-faint focus:border-gold focus:ring-1 focus:ring-gold transition" />
+          <button type="submit" class="px-4 py-2 bg-crimson text-white text-xs font-bold uppercase tracking-wider rounded-lg hover:bg-crimson-hover transition cursor-pointer shrink-0">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Posts -->
+  <section class="py-12 md:py-20 bg-earth-bg">
+    <div class="max-w-3xl mx-auto px-6 space-y-6">
+      {posts.map((post, i) => (
+        <article class={`reveal reveal-delay-${Math.min(i + 1, 3)}`}>
+          <a href={`/blog/${post.slug}/`} class="block group p-6 bg-earth-surface border border-earth-faint/10 rounded-xl hover:-translate-y-1 hover:shadow-xl hover:shadow-crimson/5 hover:border-gold/20 transition-all duration-300">
+            <div class="flex items-center gap-3 text-xs text-earth-faint mb-2">
+              <time datetime={post.date}>{formatDate(post.date)}</time>
+              <span class="w-1 h-1 rounded-full bg-earth-faint"></span>
+              <span>{post.author}</span>
+            </div>
+            <h2 class="font-display text-xl font-semibold group-hover:text-gold transition-colors mb-2">{post.title}</h2>
+            <p class="text-sm text-earth-muted leading-relaxed">{post.excerpt}</p>
+            <span class="inline-block mt-3 text-xs text-gold font-semibold uppercase tracking-wider group-hover:underline">Read more &rarr;</span>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+</PageLayout>
+
+<script>
+  function initNl() {
+    const f = document.getElementById('newsletter-form') as HTMLFormElement|null;
+    f?.addEventListener('submit',(e)=>{e.preventDefault();const b=f.querySelector('button')as HTMLButtonElement;const i=f.querySelector('input')as HTMLInputElement;if(b){const o=b.textContent;b.textContent='Subscribed!';b.disabled=true;i.value='';setTimeout(()=>{b.textContent=o;b.disabled=false;},3000);}});
+  }
+  initNl(); document.addEventListener('astro:after-swap', initNl);
+</script>

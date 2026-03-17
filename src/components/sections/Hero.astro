@@ -12,37 +12,45 @@ import Button from '@/components/ui/Button.astro';
   <div class="absolute inset-0 bg-gradient-to-b from-earth-bg/40 via-transparent to-earth-bg"></div>
 
   <div class="relative z-10 max-w-4xl mx-auto px-6 text-center py-20">
-    <!-- Nepali text reveal -->
-    <span
-      class="inline-block font-display text-sm md:text-base tracking-[0.3em] text-gold uppercase mb-4"
-      style="clip-path: inset(0 100% 0 0); animation: brush-reveal 1.2s cubic-bezier(0.65, 0, 0.35, 1) 0.3s forwards;"
+    <!-- Organization Name -->
+    <h1 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-3">
+      <span class="block" style="animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;">
+        Bhutanese Musical Group
+      </span>
+      <span class="block text-gold" style="animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;">
+        of Rochester
+      </span>
+    </h1>
+
+    <!-- Devanagari name -->
+    <p
+      class="text-xl md:text-2xl lg:text-3xl text-gold/80 mb-4 tracking-wide"
+      style="font-family: 'Noto Sans Devanagari', 'Tiro Devanagari Hindi', serif; clip-path: inset(0 100% 0 0); animation: brush-reveal 1.2s cubic-bezier(0.65, 0, 0.35, 1) 0.7s forwards;"
     >
-      भुटानी संगीत समूह रचेस्टर
-    </span>
+      भूटानी सङ्गीत समूह रोचेस्टर
+    </p>
 
     <!-- Decorative line -->
-    <div class="flex items-center justify-center gap-3 mb-6" style="animation: fade-in 1s 0.8s both;">
+    <div class="flex items-center justify-center gap-3 mb-6" style="animation: fade-in 1s 1s both;">
       <span class="h-px w-12 bg-gradient-to-r from-transparent to-gold"></span>
       <span class="w-2 h-2 rounded-full bg-gold"></span>
       <span class="h-px w-12 bg-gradient-to-l from-transparent to-gold"></span>
     </div>
 
-    <!-- Heading -->
-    <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6">
-      <span class="block" style="animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;">
-        Music Unites
-      </span>
-      <span class="block italic text-gold" style="animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;">
-        Generations
-      </span>
-    </h1>
+    <!-- Tagline -->
+    <p
+      class="font-display text-xl sm:text-2xl md:text-3xl italic text-earth-warm/80 mb-6"
+      style="animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both;"
+    >
+      Music Unites <span class="text-gold">Generations</span>
+    </p>
 
     <!-- Subtitle -->
     <p
       class="text-lg md:text-xl text-earth-muted max-w-2xl mx-auto mb-8"
       style="animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both;"
     >
-      Preserving and promoting Nepali music, arts, and culture
+      Preserving and promoting <strong class="text-earth-warm">Bhutanese Nepali</strong> music, arts, and culture
       in Rochester, New York since 2019.
     </p>
 
@@ -65,12 +73,12 @@ import Button from '@/components/ui/Button.astro';
         <span class="text-xs text-earth-faint uppercase tracking-wider">Founded</span>
       </div>
       <div class="text-center">
-        <span class="block font-display text-2xl md:text-3xl font-bold text-gold">10+</span>
+        <span class="block font-display text-2xl md:text-3xl font-bold text-gold">13+</span>
         <span class="text-xs text-earth-faint uppercase tracking-wider">Members</span>
       </div>
       <div class="text-center">
-        <span class="block font-display text-2xl md:text-3xl font-bold text-gold">30+</span>
-        <span class="text-xs text-earth-faint uppercase tracking-wider">Years of Music</span>
+        <span class="block font-display text-2xl md:text-3xl font-bold text-gold">7+</span>
+        <span class="text-xs text-earth-faint uppercase tracking-wider">Years of BMGR</span>
       </div>
       <div class="text-center">
         <span class="block font-display text-2xl md:text-3xl font-bold text-gold">6</span>

@@ -1,0 +1,93 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { siteConfig } from '@/config/site.config';
+
+const galleryItems = [
+  { src: '/images/Award.jpg', caption: 'Certificate presentation at Narayan Gopal Smriti Saanjh, December 2023' },
+  { src: '/images/NarayanGopalTribute.jpg', caption: 'A performer pays tribute to Narayan Gopal at BMGR\'s memorial evening' },
+  { src: '/images/Practice1.jpg', caption: 'Harmonium practice at a Narayan Gopal Smriti Saanjh rehearsal' },
+  { src: '/images/bmgr-group.jpg', caption: 'BMGR members together at a community gathering' },
+  { src: '/images/EventPhoto1.jpg', caption: 'Members performing at a community event' },
+  { src: '/images/Event2.jpg', caption: 'Cultural program organized by BMGR' },
+  { src: '/images/ConcertAudience1.jpg', caption: 'Community members enjoying a BMGR concert' },
+  { src: '/images/ConcertAudience2.jpg', caption: 'A full house at one of our musical evenings' },
+  { src: '/images/Concert2.jpg', caption: 'Live performance at a BMGR concert' },
+  { src: '/images/Fundraising1.jpg', caption: 'BMGR members during Deusi-Bhailo fundraising visits' },
+  { src: '/images/BirkhaGurungOnMixer.jpg', caption: 'President Birkha Gurung managing the sound mixer' },
+  { src: '/images/KiranPeleGurung.jpg', caption: 'Kiran Pele performing at a community celebration' },
+  { src: '/images/lalitRuban&Damber.jpg', caption: 'Lalit Gurung, Ruban Rai, and Damber Thapa at an event' },
+  { src: '/images/BMGR Members with audience.jpg', caption: 'BMGR members with the audience after a performance' },
+  { src: '/images/YogeshAdhikari&TekAcharya.jpg', caption: 'Yogesh Adhikari and Tek Acharya at a community program' },
+  { src: '/images/ConcertFlyer.jpg', caption: 'Promotional flyer for a BMGR concert' },
+  { src: '/images/ConcertFlyer2.jpg', caption: 'Event promotion material' },
+  { src: '/images/UshaGurung.jpg', caption: 'Usha Gurung on stage' },
+  { src: '/images/Rubanrai2.jpg', caption: 'Ruban Rai at a BMGR program' },
+  { src: '/images/TeamPhoto1.jpg', caption: 'The BMGR team' },
+];
+---
+
+<PageLayout title="Gallery" subtitle="Moments from our performances, rehearsals, and community celebrations" description="Photos from BMGR events, concerts, and cultural gatherings in Rochester, NY.">
+  <section class="py-16 md:py-24 bg-earth-bg">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+        {galleryItems.map((item, i) => (
+          <div class={`reveal reveal-delay-${(i % 5) + 1} break-inside-avoid`}>
+            <button
+              class="gallery-item group relative overflow-hidden rounded-xl cursor-pointer w-full bg-transparent border-0 p-0"
+              data-src={item.src}
+              data-caption={item.caption}
+            >
+              <img src={item.src} alt={item.caption} class="w-full rounded-xl group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+              <div class="absolute inset-0 bg-earth-bg/0 group-hover:bg-earth-bg/40 transition-colors duration-300 rounded-xl flex items-end">
+                <p class="text-earth-warm text-sm p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">{item.caption}</p>
+              </div>
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-16 text-center reveal">
+        <div class="inline-flex items-center gap-3 px-6 py-4 bg-earth-surface border border-earth-faint/10 rounded-xl">
+          <span class="text-2xl">📸</span>
+          <div class="text-left">
+            <p class="text-sm font-semibold">Have photos to share?</p>
+            <p class="text-xs text-earth-muted">Send them to <a href={`mailto:${siteConfig.contact.email}`} class="text-gold hover:underline">{siteConfig.contact.email}</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="fixed inset-0 z-[100] bg-earth-bg/90 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200 flex items-center justify-center" aria-hidden="true">
+    <button id="lb-close" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-earth-warm/10 text-earth-warm hover:bg-earth-warm/20 flex items-center justify-center cursor-pointer transition-colors z-10" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1l12 12M13 1L1 13"/></svg>
+    </button>
+    <div class="max-w-4xl w-full px-6">
+      <img id="lb-img" src="" alt="" class="w-full max-h-[75vh] object-contain rounded-xl" />
+      <p id="lb-caption" class="text-earth-muted text-sm text-center mt-3"></p>
+    </div>
+  </div>
+
+  <script>
+    function initGallery() {
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lb-img') as HTMLImageElement;
+      const cap = document.getElementById('lb-caption');
+      document.querySelectorAll('.gallery-item').forEach((el) => {
+        el.addEventListener('click', () => {
+          if (img) { img.src = el.getAttribute('data-src') || ''; img.alt = el.getAttribute('data-caption') || ''; }
+          if (cap) cap.textContent = el.getAttribute('data-caption') || '';
+          lb?.classList.remove('opacity-0', 'pointer-events-none');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+      function close() { lb?.classList.add('opacity-0', 'pointer-events-none'); document.body.style.overflow = ''; }
+      document.getElementById('lb-close')?.addEventListener('click', close);
+      lb?.addEventListener('click', (e) => { if (e.target === lb) close(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+    }
+    initGallery();
+    document.addEventListener('astro:after-swap', initGallery);
+  </script>
+</PageLayout>
