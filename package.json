@@ -1,0 +1,27 @@
+{
+  "name": "bmgr-website",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Bhutanese Musical Group of Rochester - Official Website",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "keywords": ["bmgr", "bhutanese", "music", "rochester", "nepali"],
+  "author": "Yogesh Adhikari",
+  "license": "ISC",
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.1",
+    "@fontsource-variable/playfair-display": "^5.2.8",
+    "@fontsource-variable/work-sans": "^5.2.8",
+    "@iconify-json/lucide": "^1.2.98",
+    "@iconify-json/mdi": "^1.2.3",
+    "@tailwindcss/vite": "^4.2.1",
+    "astro": "^6.0.5",
+    "astro-icon": "^1.1.5",
+    "astro-seo": "^1.1.0",
+    "tailwindcss": "^4.2.1"
+  }
+}

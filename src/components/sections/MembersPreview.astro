@@ -1,0 +1,39 @@
+---
+import { siteConfig } from '@/config/site.config';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import Button from '@/components/ui/Button.astro';
+import InitialsAvatar from '@/components/ui/InitialsAvatar.astro';
+
+// Feature 3 members with photos
+const featured = siteConfig.members.filter((m) => m.photo).slice(0, 3);
+---
+
+<section class="py-20 md:py-28 bg-earth-surface">
+  <div class="max-w-6xl mx-auto px-6">
+    <SectionHeading
+      title="Meet Our Musicians"
+      subtitle="Passionate artists preserving our musical heritage"
+    />
+
+    <div class="grid sm:grid-cols-3 gap-8 mb-10">
+      {featured.map((member, i) => (
+        <div class={`reveal reveal-delay-${i + 1} text-center`}>
+          <div class="relative mx-auto mb-4 w-32 h-32 rounded-full overflow-hidden border-2 border-gold/30">
+            <img
+              src={member.photo!}
+              alt={member.name}
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <h3 class="font-display text-lg font-semibold">{member.name}</h3>
+          <p class="text-sm text-gold">{member.role}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center reveal">
+      <Button href="/members/" variant="secondary">Meet the Team</Button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,118 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { siteConfig } from '@/config/site.config';
+import Timeline from '@/components/sections/Timeline.astro';
+import StatsCounter from '@/components/sections/StatsCounter.astro';
+import Card from '@/components/ui/Card.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import CulturalDivider from '@/components/ui/CulturalDivider.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<PageLayout
+  title="About BMGR"
+  subtitle="Our story, mission, and the values that guide us"
+  description="Learn about the Bhutanese Musical Group of Rochester — our history, mission, and commitment to preserving Nepali music and culture."
+>
+  <!-- Our Story -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="reveal">
+        <SectionHeading title="Our Story" />
+        <div class="prose prose-invert max-w-none">
+          <p class="text-lg text-earth-muted leading-relaxed text-center">
+            {siteConfig.about}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CulturalDivider variant="geometric" />
+  <StatsCounter />
+  <CulturalDivider variant="wave" />
+
+  <!-- Timeline -->
+  <Timeline />
+
+  <CulturalDivider variant="lotus" />
+
+  <!-- Core Values -->
+  <section class="py-20 md:py-28 bg-earth-surface">
+    <div class="max-w-6xl mx-auto px-6">
+      <SectionHeading
+        title="Our Values"
+        subtitle="The principles that shape everything we do"
+      />
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {siteConfig.values.map((value, i) => (
+          <div class={`reveal reveal-delay-${Math.min(i + 1, 5)}`}>
+            <Card culturalBorder class="h-full">
+              <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center mb-3">
+                <Icon name={value.icon} class="w-5 h-5 text-gold" />
+              </div>
+              <h3 class="font-display text-lg font-semibold mb-2">{value.title}</h3>
+              <p class="text-sm text-earth-muted leading-relaxed">{value.description}</p>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CulturalDivider variant="geometric" />
+
+  <!-- Leadership -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-6">
+      <SectionHeading
+        title="Leadership"
+        subtitle="The people guiding BMGR's mission"
+      />
+
+      <div class="grid sm:grid-cols-3 gap-6">
+        {siteConfig.leadership.map((leader, i) => (
+          <div class={`reveal reveal-delay-${i + 1} text-center`}>
+            <Card class="h-full text-center">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-crimson/20 to-gold/20 flex items-center justify-center mx-auto mb-3">
+                <Icon name="lucide:user" class="w-6 h-6 text-gold" />
+              </div>
+              <h3 class="font-display text-lg font-semibold">{leader.name}</h3>
+              <p class="text-sm text-gold">{leader.role}</p>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CulturalDivider variant="wave" />
+
+  <!-- Roadmap -->
+  <section class="py-20 md:py-28 bg-earth-surface">
+    <div class="max-w-4xl mx-auto px-6">
+      <SectionHeading
+        title="Looking Ahead"
+        subtitle="Building a sustainable future for BMGR"
+      />
+
+      <div class="grid sm:grid-cols-2 gap-6">
+        {[
+          { title: 'Official Registration', desc: 'Pursuing EIN and 501(c)(3) nonprofit status to secure grants and sponsorships', icon: 'lucide:file-check' },
+          { title: 'Grand Summer Concert', desc: 'A large-scale community musical event planned for June 2026', icon: 'lucide:music' },
+          { title: 'Youth Orchestra', desc: "Kids' orchestra and children's choral group to inspire the next generation", icon: 'lucide:baby' },
+          { title: 'Community Growth', desc: 'Expanding membership, improving musical skills, and strengthening community bonds', icon: 'lucide:trending-up' },
+        ].map((item, i) => (
+          <div class={`reveal reveal-delay-${i + 1}`}>
+            <Card class="h-full">
+              <Icon name={item.icon} class="w-6 h-6 text-crimson mb-3" />
+              <h3 class="font-display text-lg font-semibold mb-2">{item.title}</h3>
+              <p class="text-sm text-earth-muted">{item.desc}</p>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</PageLayout>

@@ -1,0 +1,87 @@
+/* Mandala rotation */
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse-slow {
+  to { transform: rotate(-360deg); }
+}
+
+/* Floating music notes */
+@keyframes float-note {
+  0% {
+    transform: translateY(100vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  8% { opacity: var(--note-opacity, 0.08); }
+  92% { opacity: var(--note-opacity, 0.08); }
+  100% {
+    transform: translateY(-10vh) translateX(var(--drift, 40px)) rotate(var(--end-rot, 45deg));
+    opacity: 0;
+  }
+}
+
+/* Nepali text brush reveal */
+@keyframes brush-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+/* Hero text stagger reveal */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Border rotation for member cards */
+@keyframes border-rotate {
+  to { --border-angle: 360deg; }
+}
+
+/* Shimmer effect for buttons */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Count up pulse */
+@keyframes count-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Mobile nav link stagger */
+@keyframes nav-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Decorative line draw */
+@keyframes line-draw {
+  from { stroke-dashoffset: var(--line-length, 200); }
+  to { stroke-dashoffset: 0; }
+}
+
+/* Gentle bob for floating elements */
+@keyframes gentle-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}

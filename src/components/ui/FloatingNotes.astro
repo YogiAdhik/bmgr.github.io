@@ -1,0 +1,31 @@
+---
+const notes = [
+  { char: '\u266A', left: '8%', delay: '0s', duration: '18s', opacity: 0.06, size: '1.5rem', drift: '30px', rot: '25deg' },
+  { char: '\u266B', left: '22%', delay: '3s', duration: '22s', opacity: 0.08, size: '2rem', drift: '-40px', rot: '-30deg' },
+  { char: '\u266C', left: '38%', delay: '7s', duration: '20s', opacity: 0.05, size: '1.2rem', drift: '50px', rot: '40deg' },
+  { char: '\u266A', left: '52%', delay: '1s', duration: '24s', opacity: 0.07, size: '1.8rem', drift: '-25px', rot: '-20deg' },
+  { char: '\u266B', left: '65%', delay: '5s', duration: '19s', opacity: 0.06, size: '1.4rem', drift: '35px', rot: '35deg' },
+  { char: '\u266C', left: '78%', delay: '9s', duration: '21s', opacity: 0.04, size: '2.2rem', drift: '-45px', rot: '-45deg' },
+  { char: '\u266A', left: '88%', delay: '4s', duration: '23s', opacity: 0.07, size: '1.6rem', drift: '20px', rot: '15deg' },
+  { char: '\u266B', left: '45%', delay: '11s', duration: '17s', opacity: 0.05, size: '1.3rem', drift: '-30px', rot: '-25deg' },
+];
+---
+
+<div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+  {notes.map((note) => (
+    <span
+      class="absolute text-gold"
+      style={`
+        left: ${note.left};
+        font-size: ${note.size};
+        --note-opacity: ${note.opacity};
+        --drift: ${note.drift};
+        --end-rot: ${note.rot};
+        animation: float-note ${note.duration} ease-in-out ${note.delay} infinite;
+        opacity: 0;
+      `}
+    >
+      {note.char}
+    </span>
+  ))}
+</div>

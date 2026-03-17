@@ -1,0 +1,42 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import CulturalDivider from '@/components/ui/CulturalDivider.astro';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  pageTitle?: string;
+  description?: string;
+}
+
+const { title, subtitle, pageTitle, description } = Astro.props;
+---
+
+<BaseLayout title={pageTitle || `${title} — BMGR`} description={description}>
+  <!-- Page Hero -->
+  <section class="relative py-24 md:py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-earth-surface to-earth-bg"></div>
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-gold/20"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border border-crimson/20"></div>
+    </div>
+    <div class="relative max-w-4xl mx-auto px-6 text-center">
+      <h1
+        class="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
+        style="animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards"
+      >
+        {title}
+      </h1>
+      {subtitle && (
+        <p
+          class="text-lg md:text-xl text-earth-muted max-w-2xl mx-auto"
+          style="animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both"
+        >
+          {subtitle}
+        </p>
+      )}
+    </div>
+  </section>
+  <CulturalDivider variant="wave" />
+  <slot />
+</BaseLayout>

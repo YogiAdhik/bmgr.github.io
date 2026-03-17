@@ -1,0 +1,108 @@
+---
+import '@fontsource-variable/playfair-display';
+import '@fontsource-variable/work-sans';
+import '@/styles/global.css';
+import { SEO } from 'astro-seo';
+import { siteConfig } from '@/config/site.config';
+import Header from '@/components/layout/Header.astro';
+import Footer from '@/components/layout/Footer.astro';
+import { ClientRouter } from 'astro:transitions';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = siteConfig.seo.title,
+  description = siteConfig.seo.description,
+  ogImage = siteConfig.seo.ogImage,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <SEO
+      title={title}
+      description={description}
+      canonical={canonicalURL.href}
+      openGraph={{
+        basic: {
+          title: title,
+          type: 'website',
+          image: new URL(ogImage, Astro.site).href,
+        },
+        optional: {
+          description: description,
+          locale: siteConfig.locale,
+          siteName: siteConfig.name,
+        },
+      }}
+      twitter={{
+        card: 'summary_large_image',
+        title: title,
+        description: description,
+        image: new URL(ogImage, Astro.site).href,
+      }}
+    />
+    <ClientRouter />
+    <!-- JSON-LD Structured Data -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'MusicGroup',
+        name: siteConfig.name,
+        description: siteConfig.description,
+        foundingDate: String(siteConfig.founded),
+        url: siteConfig.domain,
+        logo: new URL(siteConfig.logo.src, siteConfig.domain).href,
+        image: new URL(siteConfig.seo.ogImage, siteConfig.domain).href,
+        email: siteConfig.contact.email,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: siteConfig.contact.address.street,
+          addressLocality: siteConfig.contact.address.city,
+          addressRegion: siteConfig.contact.address.state,
+          postalCode: siteConfig.contact.address.zip,
+          addressCountry: siteConfig.contact.address.country,
+        },
+        sameAs: [siteConfig.social.facebook],
+      })}
+    />
+  </head>
+  <body class="min-h-screen bg-earth-bg text-earth-warm">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Scroll Reveal Observer -->
+    <script>
+      function initScrollReveal() {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        );
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      }
+      initScrollReveal();
+      document.addEventListener('astro:after-swap', initScrollReveal);
+    </script>
+  </body>
+</html>

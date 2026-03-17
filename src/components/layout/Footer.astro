@@ -1,0 +1,93 @@
+---
+import { Icon } from 'astro-icon/components';
+import { siteConfig } from '@/config/site.config';
+import CulturalDivider from '@/components/ui/CulturalDivider.astro';
+---
+
+<CulturalDivider variant="lotus" />
+<footer class="bg-earth-surface pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+      <!-- Brand -->
+      <div>
+        <a href="/" class="flex items-center gap-3 mb-4">
+          <img
+            src={siteConfig.logo.src}
+            alt={siteConfig.logo.alt}
+            class="w-10 h-10 rounded-full"
+            width="40"
+            height="40"
+          />
+          <span class="font-display text-xl font-bold">{siteConfig.shortName}</span>
+        </a>
+        <p class="text-sm text-earth-muted leading-relaxed">
+          {siteConfig.tagline}
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="font-display text-lg font-semibold mb-4 text-gold">Quick Links</h3>
+        <ul class="space-y-2">
+          {siteConfig.nav.map((item) => (
+            <li>
+              <a href={item.href} class="text-sm text-earth-muted hover:text-earth-warm transition-colors">
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Programs -->
+      <div>
+        <h3 class="font-display text-lg font-semibold mb-4 text-gold">Programs</h3>
+        <ul class="space-y-2">
+          {siteConfig.programs.slice(0, 4).map((program) => (
+            <li class="text-sm text-earth-muted">{program.title}</li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="font-display text-lg font-semibold mb-4 text-gold">Contact</h3>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-2 text-sm text-earth-muted">
+            <Icon name="lucide:mail" class="w-4 h-4 mt-0.5 text-gold shrink-0" />
+            <a href={`mailto:${siteConfig.contact.email}`} class="hover:text-earth-warm transition-colors">
+              {siteConfig.contact.email}
+            </a>
+          </li>
+          <li class="flex items-start gap-2 text-sm text-earth-muted">
+            <Icon name="lucide:map-pin" class="w-4 h-4 mt-0.5 text-gold shrink-0" />
+            <span>{siteConfig.contact.address.full}</span>
+          </li>
+        </ul>
+
+        <!-- Social -->
+        <div class="flex gap-3 mt-4">
+          <a
+            href={siteConfig.social.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-10 h-10 rounded-full bg-earth-surface-2 flex items-center justify-center text-earth-muted hover:text-gold hover:bg-gold-highlight transition-all"
+            aria-label="Facebook"
+          >
+            <Icon name="mdi:facebook" class="w-5 h-5" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="border-t border-earth-faint/20 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-earth-faint">
+        &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+      </p>
+      <p class="text-xs text-earth-faint">
+        Made with love for our community
+      </p>
+    </div>
+  </div>
+</footer>

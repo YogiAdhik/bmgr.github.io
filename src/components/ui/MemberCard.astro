@@ -1,0 +1,81 @@
+---
+import type { Member } from '@/config/site.config';
+import InitialsAvatar from './InitialsAvatar.astro';
+
+interface Props {
+  member: Member;
+  index: number;
+}
+
+const { member, index } = Astro.props;
+---
+
+<button
+  class="member-card group text-center cursor-pointer bg-transparent border-0 p-0 w-full"
+  data-member-index={index}
+  aria-label={`View ${member.name}'s bio`}
+>
+  <!-- Photo/Avatar Ring -->
+  <div class="member-photo-ring relative mx-auto mb-4 w-36 h-36 md:w-44 md:h-44">
+    <!-- Animated border ring -->
+    <div class="absolute inset-[-3px] rounded-full bg-gradient-conic opacity-40 group-hover:opacity-80 transition-opacity duration-500" style="background: conic-gradient(var(--color-crimson), var(--color-gold), var(--color-crimson), var(--color-gold), var(--color-crimson));"></div>
+    <div class="absolute inset-0 rounded-full overflow-hidden bg-earth-surface">
+      {member.photo ? (
+        <img
+          src={member.photo}
+          alt={member.name}
+          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          loading="lazy"
+        />
+      ) : (
+        <InitialsAvatar name={member.name} variant={member.variant || 1} />
+      )}
+    </div>
+    {member.founding && (
+      <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-gold text-earth-bg text-[10px] font-bold uppercase px-2 py-0.5 rounded-full tracking-wider">
+        Founder
+      </span>
+    )}
+  </div>
+
+  <!-- Name & Role -->
+  <h3 class="font-display text-lg font-semibold mb-1 group-hover:text-gold transition-colors">
+    {member.name}
+  </h3>
+  <p class="text-sm text-earth-muted mb-2">{member.role}</p>
+
+  <!-- Instruments -->
+  {member.instruments && member.instruments.length > 0 && (
+    <div class="flex flex-wrap justify-center gap-1">
+      {member.instruments.slice(0, 3).map((inst) => (
+        <span class="text-[11px] px-2 py-0.5 rounded-full bg-earth-surface-2 text-earth-faint">
+          {inst}
+        </span>
+      ))}
+    </div>
+  )}
+
+  <!-- View bio hint -->
+  <p class="text-xs text-gold mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+    Click to read bio
+  </p>
+</button>
+
+<style>
+  .member-card {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s ease;
+  }
+
+  .member-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .member-photo-ring {
+    animation: none;
+  }
+
+  .member-card:hover .member-photo-ring > div:first-child {
+    animation: spin-slow 8s linear infinite;
+  }
+</style>

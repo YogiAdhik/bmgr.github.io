@@ -1,0 +1,121 @@
+---
+import type { Member } from '@/config/site.config';
+import { siteConfig } from '@/config/site.config';
+import InitialsAvatar from './InitialsAvatar.astro';
+
+const members = siteConfig.members;
+---
+
+<!-- Modal backdrop -->
+<div
+  id="member-modal-backdrop"
+  class="fixed inset-0 z-[100] bg-earth-bg/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"
+  aria-hidden="true"
+>
+  <div
+    id="member-modal"
+    class="fixed inset-x-4 md:inset-x-auto md:left-1/2 md:-translate-x-1/2 top-1/2 -translate-y-1/2 md:max-w-2xl md:w-full bg-earth-surface border border-earth-faint/20 rounded-2xl p-6 md:p-8 max-h-[80vh] overflow-y-auto transform scale-95 opacity-0 transition-all duration-300"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-member-name"
+  >
+    <!-- Close button -->
+    <button
+      id="modal-close"
+      class="absolute top-4 right-4 w-8 h-8 rounded-full bg-earth-surface-2 flex items-center justify-center text-earth-muted hover:text-earth-warm hover:bg-crimson/20 transition-all cursor-pointer"
+      aria-label="Close"
+    >
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M1 1l12 12M13 1L1 13" />
+      </svg>
+    </button>
+
+    <!-- Dynamic content filled by JS -->
+    {members.map((member, i) => (
+      <div class="modal-content hidden" data-member-index={i}>
+        <div class="flex flex-col md:flex-row gap-6 items-start">
+          <!-- Photo -->
+          <div class="shrink-0 mx-auto md:mx-0">
+            <div class="w-32 h-32 rounded-full overflow-hidden border-2 border-gold/30">
+              {member.photo ? (
+                <img
+                  src={member.photo}
+                  alt={member.name}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              ) : (
+                <InitialsAvatar name={member.name} variant={member.variant || 1} size="sm" />
+              )}
+            </div>
+          </div>
+
+          <!-- Info -->
+          <div class="flex-1 text-center md:text-left">
+            <h3 id="modal-member-name" class="font-display text-2xl font-bold mb-1">
+              {member.name}
+            </h3>
+            <p class="text-gold text-sm font-medium mb-4">{member.role}</p>
+            <p class="text-earth-muted text-sm leading-relaxed mb-4">
+              {member.bio}
+            </p>
+
+            {member.instruments && member.instruments.length > 0 && (
+              <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+                {member.instruments.map((inst) => (
+                  <span class="text-xs px-3 py-1 rounded-full bg-gold-highlight text-gold border border-gold/20">
+                    {inst}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  function initModal() {
+    const backdrop = document.getElementById('member-modal-backdrop');
+    const modal = document.getElementById('member-modal');
+    const closeBtn = document.getElementById('modal-close');
+
+    function openModal(index: number) {
+      // Hide all, show selected
+      modal?.querySelectorAll('.modal-content').forEach((el) => el.classList.add('hidden'));
+      modal?.querySelector(`[data-member-index="${index}"]`)?.classList.remove('hidden');
+
+      backdrop?.classList.remove('opacity-0', 'pointer-events-none');
+      modal?.classList.remove('scale-95', 'opacity-0');
+      backdrop?.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      backdrop?.classList.add('opacity-0', 'pointer-events-none');
+      modal?.classList.add('scale-95', 'opacity-0');
+      backdrop?.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    // Card click handlers
+    document.querySelectorAll('.member-card').forEach((card) => {
+      card.addEventListener('click', () => {
+        const index = card.getAttribute('data-member-index');
+        if (index !== null) openModal(parseInt(index));
+      });
+    });
+
+    closeBtn?.addEventListener('click', closeModal);
+    backdrop?.addEventListener('click', (e) => {
+      if (e.target === backdrop) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  }
+  initModal();
+  document.addEventListener('astro:after-swap', initModal);
+</script>

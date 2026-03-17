@@ -1,0 +1,29 @@
+---
+import { siteConfig } from '@/config/site.config';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import Card from '@/components/ui/Card.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<section class="py-20 md:py-28 bg-earth-surface">
+  <div class="max-w-6xl mx-auto px-6">
+    <SectionHeading
+      title="Our Programs"
+      subtitle="Building community through music, education, and cultural celebration"
+    />
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {siteConfig.programs.map((program, i) => (
+        <div class={`reveal reveal-delay-${Math.min(i + 1, 5)}`}>
+          <Card class="h-full">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-crimson/15 to-gold/15 flex items-center justify-center mb-4">
+              <Icon name={program.icon} class="w-6 h-6 text-gold" />
+            </div>
+            <h3 class="font-display text-lg font-semibold mb-2">{program.title}</h3>
+            <p class="text-sm text-earth-muted leading-relaxed">{program.description}</p>
+          </Card>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

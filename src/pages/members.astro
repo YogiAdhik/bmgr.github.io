@@ -1,0 +1,63 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { siteConfig } from '@/config/site.config';
+import MemberCard from '@/components/ui/MemberCard.astro';
+import MemberModal from '@/components/ui/MemberModal.astro';
+import CulturalDivider from '@/components/ui/CulturalDivider.astro';
+---
+
+<PageLayout
+  title="Our Members"
+  subtitle="The passionate musicians and cultural advocates behind BMGR"
+  description="Meet the members of the Bhutanese Musical Group of Rochester — vocalists, percussionists, composers, and community leaders."
+>
+  <!-- Group Photo -->
+  <section class="py-12">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="reveal rounded-2xl overflow-hidden warm-image-wrap">
+        <img
+          src="/images/bmgr-group.jpg"
+          alt="BMGR Group Photo"
+          class="w-full h-auto object-cover"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Members Grid -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="members-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-10">
+        {siteConfig.members.map((member, i) => (
+          <div class={`reveal reveal-delay-${Math.min((i % 5) + 1, 5)} ${i % 2 !== 0 ? 'md:translate-y-8' : ''}`}>
+            <MemberCard member={member} index={i} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CulturalDivider variant="geometric" />
+
+  <!-- Join CTA -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-3xl mx-auto px-6 text-center reveal">
+      <h2 class="font-display text-2xl md:text-3xl font-bold mb-4">
+        Want to <span class="text-gold italic">join</span> the group?
+      </h2>
+      <p class="text-earth-muted mb-6">
+        BMGR welcomes musicians of all skill levels. New members start with an observer period to find their fit.
+      </p>
+      <a
+        href="/contact/"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-crimson text-white font-medium uppercase tracking-wide text-sm hover:bg-crimson-hover transition-colors"
+      >
+        Get in Touch
+      </a>
+    </div>
+  </section>
+
+  <!-- Modal (rendered once, shared) -->
+  <MemberModal />
+</PageLayout>

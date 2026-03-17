@@ -1,0 +1,93 @@
+---
+---
+
+<div class="mandala-container absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+  <svg
+    class="mandala absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+    width="900"
+    height="900"
+    viewBox="0 0 900 900"
+    fill="none"
+  >
+    <!-- Ring 1: Outermost - 24 petals -->
+    <g class="ring-1" style="transform-origin: 450px 450px; animation: spin-slow 120s linear infinite;">
+      {Array.from({ length: 24 }).map((_, i) => (
+        <g transform={`rotate(${i * 15}, 450, 450)`}>
+          <ellipse
+            cx="450"
+            cy="80"
+            rx="18"
+            ry="50"
+            fill="var(--color-crimson)"
+            opacity="0.06"
+          />
+        </g>
+      ))}
+    </g>
+
+    <!-- Ring 2: 16 diamonds -->
+    <g class="ring-2" style="transform-origin: 450px 450px; animation: spin-reverse-slow 90s linear infinite;">
+      {Array.from({ length: 16 }).map((_, i) => (
+        <g transform={`rotate(${i * 22.5}, 450, 450)`}>
+          <path
+            d="M450,160 L465,200 L450,240 L435,200 Z"
+            fill="var(--color-gold)"
+            opacity="0.07"
+          />
+        </g>
+      ))}
+    </g>
+
+    <!-- Ring 3: 12 lotus shapes -->
+    <g class="ring-3" style="transform-origin: 450px 450px; animation: spin-slow 60s linear infinite;">
+      {Array.from({ length: 12 }).map((_, i) => (
+        <g transform={`rotate(${i * 30}, 450, 450)`}>
+          <path
+            d="M450,260 Q465,280 450,310 Q435,280 450,260"
+            fill="var(--color-crimson)"
+            opacity="0.05"
+          />
+          <path
+            d="M440,265 Q450,275 460,265"
+            fill="none"
+            stroke="var(--color-gold)"
+            stroke-width="0.5"
+            opacity="0.1"
+          />
+        </g>
+      ))}
+    </g>
+
+    <!-- Ring 4: Inner 8-pointed star -->
+    <g class="ring-4" style="transform-origin: 450px 450px; animation: spin-reverse-slow 45s linear infinite;">
+      {Array.from({ length: 8 }).map((_, i) => (
+        <g transform={`rotate(${i * 45}, 450, 450)`}>
+          <path
+            d="M450,340 L458,380 L450,420 L442,380 Z"
+            fill="var(--color-gold)"
+            opacity="0.08"
+          />
+        </g>
+      ))}
+    </g>
+
+    <!-- Center circle -->
+    <circle cx="450" cy="450" r="20" fill="var(--color-gold)" opacity="0.05" />
+    <circle cx="450" cy="450" r="12" fill="var(--color-crimson)" opacity="0.04" />
+  </svg>
+</div>
+
+<style>
+  .mandala-container {
+    z-index: 0;
+  }
+
+  .mandala {
+    width: clamp(600px, 100vw, 1000px);
+    height: clamp(600px, 100vw, 1000px);
+  }
+
+  @media (max-width: 768px) {
+    .ring-3, .ring-4 { display: none; }
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+import { siteConfig } from '@/config/site.config';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+---
+
+<section class="py-20 md:py-28">
+  <div class="max-w-4xl mx-auto px-6">
+    <SectionHeading title="Our Journey" subtitle="From Nepal to Rochester — a story told through music" />
+
+    <div class="relative">
+      <!-- Vertical line -->
+      <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-crimson via-gold to-crimson/30 -translate-x-1/2"></div>
+
+      <div class="space-y-12">
+        {siteConfig.timeline.map((item, i) => (
+          <div class={`reveal relative flex gap-8 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+            <!-- Node -->
+            <div class="absolute left-4 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-earth-surface border-2 border-gold flex items-center justify-center z-10">
+              <span class="w-3 h-3 rounded-full bg-gold"></span>
+            </div>
+
+            <!-- Content card -->
+            <div class={`ml-12 md:ml-0 md:w-[calc(50%-2rem)] ${i % 2 === 0 ? 'md:pr-8' : 'md:pl-8 md:ml-auto'}`}>
+              <div class="bg-earth-surface border border-earth-faint/10 rounded-xl p-5 hover:border-gold/20 transition-colors">
+                <span class="font-display text-2xl font-bold text-gold">{item.year}</span>
+                <h3 class="font-display text-lg font-semibold mt-1 mb-2">{item.title}</h3>
+                <p class="text-sm text-earth-muted leading-relaxed">{item.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

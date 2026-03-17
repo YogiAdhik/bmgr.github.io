@@ -1,0 +1,38 @@
+---
+import { siteConfig } from '@/config/site.config';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+---
+
+<nav class="hidden md:flex items-center gap-1" aria-label="Main navigation">
+  {siteConfig.nav.map((item) => (
+    <a
+      href={item.href}
+      class:list={[
+        'nav-link relative px-4 py-2 text-sm font-medium tracking-wide uppercase transition-colors',
+        currentPath === item.href
+          ? 'text-gold'
+          : 'text-earth-muted hover:text-earth-warm',
+      ]}
+    >
+      {item.label}
+      <span
+        class:list={[
+          'nav-underline absolute bottom-0 left-1/2 h-[2px] bg-gradient-to-r from-crimson to-gold transition-all duration-300',
+          currentPath === item.href ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2',
+        ]}
+      ></span>
+    </a>
+  ))}
+</nav>
+
+<style>
+  .nav-link:hover .nav-underline {
+    width: 100%;
+    transform: translateX(-50%);
+  }
+</style>

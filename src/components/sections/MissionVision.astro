@@ -1,0 +1,40 @@
+---
+import { siteConfig } from '@/config/site.config';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import Card from '@/components/ui/Card.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<section class="py-20 md:py-28 bg-earth-bg">
+  <div class="max-w-6xl mx-auto px-6">
+    <SectionHeading title="Our Purpose" subtitle="Guided by a shared passion for music and cultural preservation" />
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Mission -->
+      <div class="reveal">
+        <Card culturalBorder>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg bg-crimson/15 flex items-center justify-center">
+              <Icon name="lucide:compass" class="w-5 h-5 text-crimson" />
+            </div>
+            <h3 class="font-display text-xl font-semibold">Our Mission</h3>
+          </div>
+          <p class="text-earth-muted leading-relaxed">{siteConfig.mission}</p>
+        </Card>
+      </div>
+
+      <!-- Vision -->
+      <div class="reveal reveal-delay-1">
+        <Card culturalBorder>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg bg-gold/15 flex items-center justify-center">
+              <Icon name="lucide:eye" class="w-5 h-5 text-gold" />
+            </div>
+            <h3 class="font-display text-xl font-semibold">Our Vision</h3>
+          </div>
+          <p class="text-earth-muted leading-relaxed">{siteConfig.vision}</p>
+        </Card>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,221 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { siteConfig } from '@/config/site.config';
+import Card from '@/components/ui/Card.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import CulturalDivider from '@/components/ui/CulturalDivider.astro';
+import Button from '@/components/ui/Button.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<PageLayout
+  title="Get in Touch"
+  subtitle="We'd love to hear from you — whether you want to join, collaborate, or support BMGR"
+  description="Contact the Bhutanese Musical Group of Rochester. Reach out to join, volunteer, sponsor, or learn more about our musical community."
+>
+  <section class="py-20 md:py-28">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid lg:grid-cols-5 gap-10">
+        <!-- Contact Form -->
+        <div class="lg:col-span-3 reveal">
+          <Card hover={false} class="p-6 md:p-8">
+            <h2 class="font-display text-2xl font-bold mb-6">Send us a Message</h2>
+            <form action="https://formspree.io/f/placeholder" method="POST" class="space-y-5" id="contact-form">
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="first-name" class="block text-sm font-medium text-earth-muted mb-1">
+                    First Name
+                  </label>
+                  <input
+                    type="text"
+                    id="first-name"
+                    name="firstName"
+                    required
+                    class="w-full px-4 py-2.5 rounded-lg bg-earth-bg border border-earth-faint/20 text-earth-warm placeholder:text-earth-faint focus:border-gold focus:ring-1 focus:ring-gold transition-colors"
+                    placeholder="Your first name"
+                  />
+                </div>
+                <div>
+                  <label for="last-name" class="block text-sm font-medium text-earth-muted mb-1">
+                    Last Name
+                  </label>
+                  <input
+                    type="text"
+                    id="last-name"
+                    name="lastName"
+                    required
+                    class="w-full px-4 py-2.5 rounded-lg bg-earth-bg border border-earth-faint/20 text-earth-warm placeholder:text-earth-faint focus:border-gold focus:ring-1 focus:ring-gold transition-colors"
+                    placeholder="Your last name"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label for="email" class="block text-sm font-medium text-earth-muted mb-1">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full px-4 py-2.5 rounded-lg bg-earth-bg border border-earth-faint/20 text-earth-warm placeholder:text-earth-faint focus:border-gold focus:ring-1 focus:ring-gold transition-colors"
+                  placeholder="your@email.com"
+                />
+              </div>
+
+              <div>
+                <label for="inquiry" class="block text-sm font-medium text-earth-muted mb-1">
+                  Inquiry Type
+                </label>
+                <select
+                  id="inquiry"
+                  name="inquiryType"
+                  class="w-full px-4 py-2.5 rounded-lg bg-earth-bg border border-earth-faint/20 text-earth-warm focus:border-gold focus:ring-1 focus:ring-gold transition-colors"
+                >
+                  <option value="membership">Join BMGR</option>
+                  <option value="volunteer">Volunteer</option>
+                  <option value="sponsorship">Sponsorship / Donation</option>
+                  <option value="performance">Performance Request</option>
+                  <option value="general">General Inquiry</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="message" class="block text-sm font-medium text-earth-muted mb-1">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  required
+                  class="w-full px-4 py-2.5 rounded-lg bg-earth-bg border border-earth-faint/20 text-earth-warm placeholder:text-earth-faint focus:border-gold focus:ring-1 focus:ring-gold transition-colors resize-none"
+                  placeholder="Tell us how we can help..."
+                ></textarea>
+              </div>
+
+              <Button variant="primary" size="md" class="w-full sm:w-auto">
+                Send Message
+              </Button>
+            </form>
+          </Card>
+        </div>
+
+        <!-- Contact Info Sidebar -->
+        <div class="lg:col-span-2 space-y-6">
+          <!-- Email -->
+          <div class="reveal reveal-delay-1">
+            <Card class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-crimson/15 flex items-center justify-center shrink-0">
+                <Icon name="lucide:mail" class="w-5 h-5 text-crimson" />
+              </div>
+              <div>
+                <h3 class="font-semibold text-sm mb-1">Email</h3>
+                <a href={`mailto:${siteConfig.contact.email}`} class="text-sm text-gold hover:text-gold-hover transition-colors">
+                  {siteConfig.contact.email}
+                </a>
+              </div>
+            </Card>
+          </div>
+
+          <!-- Location -->
+          <div class="reveal reveal-delay-2">
+            <Card class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-gold/15 flex items-center justify-center shrink-0">
+                <Icon name="lucide:map-pin" class="w-5 h-5 text-gold" />
+              </div>
+              <div>
+                <h3 class="font-semibold text-sm mb-1">Location</h3>
+                <p class="text-sm text-earth-muted">{siteConfig.contact.address.full}</p>
+              </div>
+            </Card>
+          </div>
+
+          <!-- Leadership -->
+          <div class="reveal reveal-delay-3">
+            <Card class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-crimson/15 flex items-center justify-center shrink-0">
+                <Icon name="lucide:users" class="w-5 h-5 text-crimson" />
+              </div>
+              <div>
+                <h3 class="font-semibold text-sm mb-2">Leadership</h3>
+                {siteConfig.leadership.map((l) => (
+                  <p class="text-sm text-earth-muted">
+                    <span class="text-earth-warm">{l.name}</span> — {l.role}
+                  </p>
+                ))}
+              </div>
+            </Card>
+          </div>
+
+          <!-- Social -->
+          <div class="reveal reveal-delay-4">
+            <Card>
+              <h3 class="font-semibold text-sm mb-3">Follow Us</h3>
+              <a
+                href={siteConfig.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 text-sm text-earth-muted hover:text-gold transition-colors"
+              >
+                <Icon name="mdi:facebook" class="w-5 h-5" />
+                Facebook
+              </a>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CulturalDivider variant="geometric" />
+
+  <!-- Membership Info -->
+  <section class="py-20 md:py-28 bg-earth-surface">
+    <div class="max-w-4xl mx-auto px-6">
+      <SectionHeading
+        title="Membership"
+        subtitle="Join our growing family of musicians and cultural advocates"
+      />
+
+      <div class="grid sm:grid-cols-3 gap-6">
+        {[
+          { title: 'Open to All', desc: 'Musicians of all skill levels are welcome. Passion for music is the only requirement.', icon: 'lucide:heart' },
+          { title: 'Observer Period', desc: 'New members start with an observer period to find their fit within the group.', icon: 'lucide:clock' },
+          { title: 'Community First', desc: 'We value commitment, moral character, and active community involvement.', icon: 'lucide:hand-heart' },
+        ].map((item, i) => (
+          <div class={`reveal reveal-delay-${i + 1}`}>
+            <Card culturalBorder class="text-center h-full">
+              <Icon name={item.icon} class="w-8 h-8 text-gold mx-auto mb-3" />
+              <h3 class="font-display text-lg font-semibold mb-2">{item.title}</h3>
+              <p class="text-sm text-earth-muted">{item.desc}</p>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<script>
+  function initContactForm() {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"], button:not([type])') as HTMLButtonElement | null;
+      if (btn) {
+        const original = btn.textContent;
+        btn.textContent = 'Message Sent!';
+        btn.disabled = true;
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.disabled = false;
+          form.reset();
+        }, 3000);
+      }
+    });
+  }
+  initContactForm();
+  document.addEventListener('astro:after-swap', initContactForm);
+</script>

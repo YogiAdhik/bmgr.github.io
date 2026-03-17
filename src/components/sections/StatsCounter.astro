@@ -1,0 +1,74 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const stats = [
+  { value: 30, suffix: '+', label: 'Years of Music', icon: 'lucide:music' },
+  { value: 10, suffix: '+', label: 'Active Members', icon: 'lucide:users' },
+  { value: 6, suffix: '', label: 'Programs', icon: 'lucide:calendar' },
+  { value: 2019, suffix: '', label: 'Established', icon: 'lucide:flag' },
+];
+---
+
+<section class="py-16 bg-earth-surface border-y border-earth-faint/10">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8" id="stats-section">
+      {stats.map((stat) => (
+        <div class="text-center reveal">
+          <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center mx-auto mb-3">
+            <Icon name={stat.icon} class="w-5 h-5 text-gold" />
+          </div>
+          <span
+            class="block font-display text-3xl md:text-4xl font-bold text-gold stat-number"
+            data-target={stat.value}
+            data-suffix={stat.suffix}
+          >
+            0{stat.suffix}
+          </span>
+          <span class="text-xs text-earth-faint uppercase tracking-wider mt-1 block">
+            {stat.label}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  function initStats() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const numbers = entry.target.querySelectorAll('.stat-number');
+          numbers.forEach((el) => {
+            const target = parseInt(el.getAttribute('data-target') || '0');
+            const suffix = el.getAttribute('data-suffix') || '';
+            const duration = 2000;
+            const start = performance.now();
+
+            function animate(now: number) {
+              const elapsed = now - start;
+              const progress = Math.min(elapsed / duration, 1);
+              // Ease out expo
+              const eased = 1 - Math.pow(1 - progress, 4);
+              const current = Math.round(eased * target);
+              el.textContent = `${current}${suffix}`;
+              if (progress < 1) requestAnimationFrame(animate);
+            }
+
+            requestAnimationFrame(animate);
+          });
+
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    const section = document.getElementById('stats-section');
+    if (section) observer.observe(section);
+  }
+  initStats();
+  document.addEventListener('astro:after-swap', initStats);
+</script>

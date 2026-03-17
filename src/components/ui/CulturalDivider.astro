@@ -1,0 +1,53 @@
+---
+interface Props {
+  variant?: 'lotus' | 'wave' | 'geometric';
+  class?: string;
+}
+
+const { variant = 'geometric', class: className } = Astro.props;
+---
+
+{variant === 'wave' && (
+  <div class:list={['w-full overflow-hidden', className]} aria-hidden="true">
+    <svg viewBox="0 0 1200 40" preserveAspectRatio="none" class="w-full h-6 md:h-8">
+      <path
+        d="M0,20 Q50,5 100,20 T200,20 T300,20 T400,20 T500,20 T600,20 T700,20 T800,20 T900,20 T1000,20 T1100,20 T1200,20"
+        fill="none"
+        stroke="var(--color-gold)"
+        stroke-width="1"
+        opacity="0.3"
+      />
+      <path
+        d="M0,25 Q50,10 100,25 T200,25 T300,25 T400,25 T500,25 T600,25 T700,25 T800,25 T900,25 T1000,25 T1100,25 T1200,25"
+        fill="none"
+        stroke="var(--color-crimson)"
+        stroke-width="1"
+        opacity="0.2"
+      />
+    </svg>
+  </div>
+)}
+
+{variant === 'lotus' && (
+  <div class:list={['w-full overflow-hidden', className]} aria-hidden="true">
+    <svg viewBox="0 0 1200 30" preserveAspectRatio="none" class="w-full h-5 md:h-7">
+      {Array.from({ length: 24 }).map((_, i) => (
+        <g transform={`translate(${i * 50}, 15)`}>
+          <path
+            d="M0,-8 Q12,-12 25,0 Q12,12 0,8 Q-12,12 -25,0 Q-12,-12 0,-8"
+            fill="none"
+            stroke={i % 2 === 0 ? 'var(--color-crimson)' : 'var(--color-gold)'}
+            stroke-width="0.8"
+            opacity="0.25"
+          />
+        </g>
+      ))}
+    </svg>
+  </div>
+)}
+
+{variant === 'geometric' && (
+  <div class:list={['w-full py-2', className]} aria-hidden="true">
+    <div class="h-[3px] bg-repeat-x" style="background-image: repeating-linear-gradient(90deg, var(--color-crimson) 0px, var(--color-crimson) 8px, var(--color-gold) 8px, var(--color-gold) 12px, transparent 12px, transparent 16px, var(--color-gold) 16px, var(--color-gold) 20px, var(--color-crimson) 20px, var(--color-crimson) 28px, transparent 28px, transparent 32px);"></div>
+  </div>
+)}

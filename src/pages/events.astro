@@ -1,0 +1,92 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import { siteConfig } from '@/config/site.config';
+import EventCard from '@/components/ui/EventCard.astro';
+import Card from '@/components/ui/Card.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import CulturalDivider from '@/components/ui/CulturalDivider.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<PageLayout
+  title="Events & Music"
+  subtitle="Our upcoming gatherings, song repertoire, and musical resources"
+  description="Discover BMGR's upcoming events, song repertoire, and musical equipment — all in service of preserving Nepali music and culture."
+>
+  <!-- Upcoming Events -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-6">
+      <SectionHeading title="Upcoming Events" />
+
+      <div class="space-y-4">
+        {siteConfig.events.map((event, i) => (
+          <div class={`reveal reveal-delay-${i + 1}`}>
+            <EventCard event={event} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CulturalDivider variant="geometric" />
+
+  <!-- Song Repertoire -->
+  <section class="py-20 md:py-28 bg-earth-surface">
+    <div class="max-w-4xl mx-auto px-6">
+      <SectionHeading
+        title="Our Repertoire"
+        subtitle="Songs that bring our community together"
+      />
+
+      <div class="grid sm:grid-cols-2 gap-6">
+        {siteConfig.songs.map((song, i) => (
+          <div class={`reveal reveal-delay-${i + 1}`}>
+            <div class="song-card group relative bg-earth-bg border border-earth-faint/10 rounded-xl p-5 hover:border-gold/20 transition-all duration-300 overflow-hidden">
+              <!-- Staff lines decoration -->
+              <div class="absolute top-2 left-5 right-5 opacity-10 pointer-events-none" aria-hidden="true">
+                <div class="h-px bg-gold mb-2"></div>
+                <div class="h-px bg-gold mb-2"></div>
+              </div>
+
+              <div class="relative">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-gold text-lg">&#9835;</span>
+                  <h3 class="font-display text-lg font-semibold italic group-hover:text-gold transition-colors">
+                    {song.title}
+                  </h3>
+                </div>
+                <p class="text-sm text-earth-muted">{song.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CulturalDivider variant="lotus" />
+
+  <!-- Equipment -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-6">
+      <SectionHeading
+        title="Our Equipment"
+        subtitle="The instruments and gear that power our performances"
+      />
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        {siteConfig.equipment.map((item, i) => (
+          <div class={`reveal reveal-delay-${Math.min(i + 1, 5)}`}>
+            <Card class="text-center h-full">
+              <div class="w-12 h-12 rounded-full bg-crimson/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-gold/15 transition-colors">
+                <Icon name={item.icon} class="w-6 h-6 text-gold" />
+              </div>
+              <p class="font-semibold text-sm">{item.name}</p>
+              <p class="text-xs text-gold">{item.count}</p>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</PageLayout>

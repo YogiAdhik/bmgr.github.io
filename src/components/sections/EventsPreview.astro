@@ -1,0 +1,27 @@
+---
+import { siteConfig } from '@/config/site.config';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import EventCard from '@/components/ui/EventCard.astro';
+import Button from '@/components/ui/Button.astro';
+---
+
+<section class="py-20 md:py-28 bg-earth-bg">
+  <div class="max-w-4xl mx-auto px-6">
+    <SectionHeading
+      title="Upcoming Events"
+      subtitle="Join us at our next gathering"
+    />
+
+    <div class="space-y-4 mb-10">
+      {siteConfig.events.map((event, i) => (
+        <div class={`reveal reveal-delay-${Math.min(i + 1, 3)}`}>
+          <EventCard event={event} />
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center reveal">
+      <Button href="/events/" variant="secondary">View All Events</Button>
+    </div>
+  </div>
+</section>

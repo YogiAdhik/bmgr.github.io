@@ -1,0 +1,59 @@
+---
+import { getInitials } from '@/utils/getInitials';
+
+interface Props {
+  name: string;
+  variant?: number;
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const { name, variant = 1, size = 'md' } = Astro.props;
+
+const initials = getInitials(name);
+
+const gradients: Record<number, string> = {
+  1: 'linear-gradient(135deg, #8B2020, #D4941A)',
+  2: 'linear-gradient(135deg, #1A3A2A, #D4941A)',
+  3: 'linear-gradient(135deg, #3A1A4A, #C8332A)',
+  4: 'linear-gradient(135deg, #1A2A4A, #D4941A)',
+  5: 'linear-gradient(135deg, #4A2A0A, #C8332A)',
+};
+
+const sizeClasses = {
+  sm: 'w-16 h-16 text-xl',
+  md: 'w-36 h-36 md:w-44 md:h-44 text-4xl',
+  lg: 'w-48 h-48 text-5xl',
+};
+---
+
+<div
+  class:list={[
+    'relative rounded-full flex items-center justify-center font-display font-bold text-white/80 select-none overflow-hidden',
+    sizeClasses[size],
+  ]}
+  style={`background: ${gradients[variant] || gradients[1]};`}
+  role="img"
+  aria-label={name}
+>
+  <!-- Subtle mandala watermark -->
+  <svg
+    class="absolute inset-0 w-full h-full opacity-[0.08]"
+    viewBox="0 0 100 100"
+    aria-hidden="true"
+  >
+    {Array.from({ length: 8 }).map((_, i) => (
+      <line
+        x1="50"
+        y1="10"
+        x2="50"
+        y2="30"
+        stroke="white"
+        stroke-width="0.5"
+        transform={`rotate(${i * 45}, 50, 50)`}
+      />
+    ))}
+    <circle cx="50" cy="50" r="25" fill="none" stroke="white" stroke-width="0.3" />
+    <circle cx="50" cy="50" r="35" fill="none" stroke="white" stroke-width="0.3" />
+  </svg>
+  <span class="relative z-10">{initials}</span>
+</div>

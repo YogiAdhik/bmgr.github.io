@@ -1,0 +1,81 @@
+---
+import MandalaBackground from '@/components/ui/MandalaBackground.astro';
+import FloatingNotes from '@/components/ui/FloatingNotes.astro';
+import Button from '@/components/ui/Button.astro';
+---
+
+<section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+  <MandalaBackground />
+  <FloatingNotes />
+
+  <!-- Gradient overlay for readability -->
+  <div class="absolute inset-0 bg-gradient-to-b from-earth-bg/40 via-transparent to-earth-bg"></div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-6 text-center py-20">
+    <!-- Nepali text reveal -->
+    <span
+      class="inline-block font-display text-sm md:text-base tracking-[0.3em] text-gold uppercase mb-4"
+      style="clip-path: inset(0 100% 0 0); animation: brush-reveal 1.2s cubic-bezier(0.65, 0, 0.35, 1) 0.3s forwards;"
+    >
+      भुटानी संगीत समूह रचेस्टर
+    </span>
+
+    <!-- Decorative line -->
+    <div class="flex items-center justify-center gap-3 mb-6" style="animation: fade-in 1s 0.8s both;">
+      <span class="h-px w-12 bg-gradient-to-r from-transparent to-gold"></span>
+      <span class="w-2 h-2 rounded-full bg-gold"></span>
+      <span class="h-px w-12 bg-gradient-to-l from-transparent to-gold"></span>
+    </div>
+
+    <!-- Heading -->
+    <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6">
+      <span class="block" style="animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;">
+        Music Unites
+      </span>
+      <span class="block italic text-gold" style="animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;">
+        Generations
+      </span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p
+      class="text-lg md:text-xl text-earth-muted max-w-2xl mx-auto mb-8"
+      style="animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both;"
+    >
+      Preserving and promoting Nepali music, arts, and culture
+      in Rochester, New York since 2019.
+    </p>
+
+    <!-- CTAs -->
+    <div
+      class="flex flex-col sm:flex-row items-center justify-center gap-4"
+      style="animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.1s both;"
+    >
+      <Button href="/events/" variant="primary" size="lg">Upcoming Events</Button>
+      <Button href="/about/" variant="secondary" size="lg">Our Story</Button>
+    </div>
+
+    <!-- Stats bar -->
+    <div
+      class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 pt-8 border-t border-earth-faint/15"
+      style="animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.3s both;"
+    >
+      <div class="text-center">
+        <span class="block font-display text-2xl md:text-3xl font-bold text-gold">2019</span>
+        <span class="text-xs text-earth-faint uppercase tracking-wider">Founded</span>
+      </div>
+      <div class="text-center">
+        <span class="block font-display text-2xl md:text-3xl font-bold text-gold">10+</span>
+        <span class="text-xs text-earth-faint uppercase tracking-wider">Members</span>
+      </div>
+      <div class="text-center">
+        <span class="block font-display text-2xl md:text-3xl font-bold text-gold">30+</span>
+        <span class="text-xs text-earth-faint uppercase tracking-wider">Years of Music</span>
+      </div>
+      <div class="text-center">
+        <span class="block font-display text-2xl md:text-3xl font-bold text-gold">6</span>
+        <span class="text-xs text-earth-faint uppercase tracking-wider">Programs</span>
+      </div>
+    </div>
+  </div>
+</section>

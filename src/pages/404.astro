@@ -1,0 +1,35 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Button from '@/components/ui/Button.astro';
+---
+
+<BaseLayout title="Page Not Found — BMGR">
+  <section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+    <!-- Faded mandala bg -->
+    <div class="absolute inset-0 opacity-[0.03]">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-gold"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full border border-crimson"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] rounded-full border border-gold"></div>
+    </div>
+
+    <!-- Floating note -->
+    <span
+      class="absolute text-gold text-4xl opacity-[0.06]"
+      style="left: 30%; animation: float-note 20s ease-in-out infinite; --note-opacity: 0.06; --drift: 40px; --end-rot: 30deg;"
+      aria-hidden="true"
+    >&#9835;</span>
+
+    <div class="relative z-10 text-center px-6">
+      <h1 class="font-display text-[8rem] md:text-[12rem] font-bold leading-none bg-gradient-to-br from-crimson to-gold bg-clip-text text-transparent">
+        404
+      </h1>
+      <p class="font-display text-xl md:text-2xl text-earth-muted mb-2 -mt-4">
+        This melody wasn't found
+      </p>
+      <p class="text-sm text-earth-faint mb-8">
+        यो धुन भेटिएन
+      </p>
+      <Button href="/" variant="primary" size="lg">Back to Home</Button>
+    </div>
+  </section>
+</BaseLayout>

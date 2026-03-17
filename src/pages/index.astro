@@ -1,0 +1,23 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/sections/Hero.astro';
+import MissionVision from '@/components/sections/MissionVision.astro';
+import ProgramsGrid from '@/components/sections/ProgramsGrid.astro';
+import EventsPreview from '@/components/sections/EventsPreview.astro';
+import MembersPreview from '@/components/sections/MembersPreview.astro';
+import CTABand from '@/components/sections/CTABand.astro';
+import CulturalDivider from '@/components/ui/CulturalDivider.astro';
+---
+
+<BaseLayout>
+  <Hero />
+  <CulturalDivider variant="wave" />
+  <MissionVision />
+  <CulturalDivider variant="geometric" />
+  <ProgramsGrid />
+  <CulturalDivider variant="lotus" />
+  <EventsPreview />
+  <CulturalDivider variant="wave" />
+  <MembersPreview />
+  <CTABand />
+</BaseLayout>
